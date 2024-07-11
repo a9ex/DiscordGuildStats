@@ -24,7 +24,7 @@ export const AuthOptions = {
     },
   },
 
-  secret: "secret",
+  secret: getSafeEnv('JWT_SECRET'),
 };
 
 function auth(
