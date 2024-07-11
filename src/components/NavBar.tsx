@@ -12,14 +12,14 @@ export default function NavBar() {
 
     return (
         <div className="flow-root p-8">
-        <div className="float-left">
-          Discord Guild Stats
-        </div>
+            <div className="float-left">
+            Discord Guild Stats
+            </div>
         <div className="float-right pr-5">
           {data ? (
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Avatar>
+                    <Avatar className="hover:opacity-75 transition-opacity duration-150 ease-in-out cursor-pointer">
                         {user?.image && (
                             <AvatarImage src={user.image} alt="User avatar" />
                             )}
