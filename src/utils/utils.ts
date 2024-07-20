@@ -5,3 +5,9 @@ export function getSafeEnv(key: string): string {
     }
     return value;
 }
+
+export function throwIfFalsy<T>(value: T | null | undefined, message = 'Wtf'): asserts value is T {
+    if (!value) {
+        throw new Error(message);
+    }
+}

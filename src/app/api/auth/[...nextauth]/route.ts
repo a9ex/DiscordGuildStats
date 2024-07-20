@@ -5,7 +5,7 @@ import DiscordProvider from "next-auth/providers/discord";
 
 const scopes = ['identify', 'guilds'].join('%20');
 
-export const AuthOptions = {
+const AuthOptions = {
   providers: [
     DiscordProvider({
         clientId: getSafeEnv('DISCORD_CLIENT_ID'),
