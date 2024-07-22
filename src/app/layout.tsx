@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import NextAuthProvider from "./context/NextAuthProvider";
-import NavBar from "@/components/NavBar";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { ThemeProvider } from '@/components/theme-provider';
+import NextAuthProvider from './context/NextAuthProvider';
+import NavBar from '@/components/NavBar';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Discord Guild Stats",
-  description: "A simple app to track guild statistics.",
+  title: 'Discord Guild Stats',
+  description: 'A simple app to track guild statistics.',
 };
 
 export default function RootLayout({
@@ -26,8 +26,8 @@ export default function RootLayout({
             defaultTheme="system"
             enableSystem={true}
             disableTransitionOnChange
-            themes={["dark"]}
-            >
+            themes={['dark']}
+          >
             <main className="flex flex-col h-screen">
               <NavBar />
               {children}
