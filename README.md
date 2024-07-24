@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Discord Guild Stats
 
-## Getting Started
+### **Live: https://guild-stats.a1ex.fr**
 
-First, run the development server:
+Discord Guild Stats is a mini-project to view some stats from the Discord guilds you are on:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![alt text](image.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Built with Next.JS, NextAuth, shadcn/ui, TailwindCSS, Lucide
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Development :
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The project can be tested with `npm run dev`, NextJS includes something like an HMR and Fast Reload.
 
-## Learn More
+You need to create an .env.local file which will be injected with the following variables :
+- `DISCORD_API_BASE_URL`
+- `DISCORD_CLIENT_ID`
+- `DISCORD_CLIENT_SECRET`
+- `JWT_SECRET`
 
-To learn more about Next.js, take a look at the following resources:
+(`NEXT_AUTH_URL` required in production with the canonical URL)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploying 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+> [!NOTE]
+> As the app uses server functions, it is not possible to build it and export it statically.
 
-## Deploy on Vercel
+I always prefer to deploy using Docker whenever possible.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+For this project, it's possible to build the docker image with the Dockerfile supplied and launch it with `docker run -p 3000:3000 [--env-file | --env] <envs> discord-guild-stats` (build `docker build -t discord-guild-stats .`)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Also possible to build it with `npm run build`.
