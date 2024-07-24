@@ -5,20 +5,14 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Crown, Shield, Swords, Users } from 'lucide-react';
 import { signIn, useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
-import { ApiMeResponse } from './api/user/me/guilds/route';
+import { useAtomValue } from 'jotai';
+import { getDiscordDataAtom, useFetchDiscordData } from './lib/data';
 
 export default function Home() {
   const session = useSession();
-  const [discordData, setDiscordData] = useState<ApiMeResponse>();
+  const discordData = useAtomValue(getDiscordDataAtom);
 
-  useEffect(() => {
-    if (session.data) {
-      fetch('/api/user/me/guilds')
-        .then((res) => res.json())
-        .then(setDiscordData);
-    }
-  }, [session.data]);
+  useFetchDiscordData(session.data);
 
   return (
     <div className="flex-1 flex items-center justify-center">
