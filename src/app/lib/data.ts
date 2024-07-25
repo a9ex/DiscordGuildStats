@@ -1,20 +1,15 @@
-import { useEffect } from 'react'
-import { Session } from 'next-auth'
-import { atom, useSetAtom } from 'jotai'
-import { ApiMeResponse } from '../api/user/me/guilds/route'
+import { useQuery } from '@tanstack/react-query';
+import { Session } from 'next-auth';
+import { ApiMeResponse } from '../api/user/me/guilds/route';
 
-const discordDataAtom = atom<ApiMeResponse | undefined>()
+function fetchDiscordData(): Promise<ApiMeResponse> {
+  return fetch('/api/user/me/guilds').then((data) => data.json());
+}
 
-export const getDiscordDataAtom = atom((get) => get(discordDataAtom))
-
-export function useFetchDiscordData(session: Session | null) {
-  const setDiscordData = useSetAtom(discordDataAtom)
-
-  useEffect(() => {
-    if (session) {
-      fetch('/api/user/me/guilds')
-        .then((res) => res.json())
-        .then(setDiscordData)
-    }
-  }, [session])
+export function useDiscordData(session: Session | null) {
+  return useQuery<ApiMeResponse, Error>({
+    queryKey: ['discordData', session?.user?.name],
+    queryFn: fetchDiscordData,
+    enabled: !!session,
+  });
 }
