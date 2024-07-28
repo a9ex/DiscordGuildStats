@@ -5,14 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Crown, Shield, Swords, Users } from 'lucide-react';
 import { signIn, useSession } from 'next-auth/react';
-import { useAtomValue } from 'jotai';
-import { getDiscordDataAtom, useFetchDiscordData } from './lib/data';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { useDiscordData } from './lib/data';
 
-export default function Home() {
+function HomeContent() {
   const session = useSession();
-  const discordData = useAtomValue(getDiscordDataAtom);
-
-  useFetchDiscordData(session.data);
+  const { data: discordData } = useDiscordData(session.data);
 
   return (
     <div className="flex-1 flex items-center justify-center">
@@ -59,5 +57,15 @@ export default function Home() {
         </Button>
       )}
     </div>
+  );
+}
+
+const queryClient = new QueryClient();
+
+export default function Home() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <HomeContent />
+    </QueryClientProvider>
   );
 }
